@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DepEd Region VIII | Quality Assurance Division</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==============================
+       GOVERNMENT MODERN DESIGN SYSTEM
+       ============================== */
+    :root{
+      --gov-blue:#0b3c8a;      /* primary gov blue */
+      --gov-blue-2:#1e5bbf;    /* secondary */
+      --gov-gold:#fbbf24;      /* accent */
+      --bg:#f8fafc;            /* background */
+      --card:#ffffff;          /* cards */
+      --text:#0f172a;          /* primary text */
+      --muted:#64748b;         /* secondary text */
+      --border:#e5e7eb;        /* borders */
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+
+    /* ACCESSIBILITY */
+    a:focus, button:focus{outline:3px solid var(--gov-gold); outline-offset:2px}
+
+    /* ==============================
+       TOP GOVERNMENT BAR
+       ============================== */
+    .topbar{
+      background:#020617;
+      color:#e5e7eb;
+      font-size:0.75rem;
+      padding:.45rem 1.2rem;
+      text-align:center;
+    }
+
+    /* ==============================
+       HEADER / NAVIGATION
+       ============================== */
+    header{
+      position:sticky; top:0; z-index:1000;
+      background:#ffffffee;
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:1400px;
+      margin:auto;
+      padding:1rem 1.5rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex;
+      gap:.8rem;
+      align-items:center;
+      font-weight:700;
+      color:var(--gov-blue);
+    }
+    .brand .seal{
+      width:42px;height:42px;border-radius:50%;
+      background:linear-gradient(135deg,var(--gov-blue),var(--gov-blue-2));
+      display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:700;
+    }
+    nav a{
+      margin-left:26px;
+      text-decoration:none;
+      font-size:.9rem;
+      font-weight:500;
+      color:var(--muted);
+    }
+    nav a:hover{color:var(--gov-blue)}
+
+    /* ==============================
+       HERO (OFFICIAL GOVERNMENT STYLE)
+       ============================== */
+    .hero{
+      background:
+        linear-gradient(180deg,rgba(11,60,138,.95),rgba(11,60,138,.9)),
+        repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 10px,transparent 10px,transparent 20px);
+      color:#fff;
+      padding:5.5rem 1.5rem 4.5rem;
+    }
+    .hero-inner{
+      max-width:1100px;margin:auto;text-align:center;
+    }
+    .hero h1{
+      font-size:2.6rem;
+      margin:.2rem 0 1rem;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .hero p{
+      max-width:900px;margin:auto;
+      font-size:1.05rem;opacity:.95
+    }
+
+    /* ==============================
+       LAYOUT
+       ============================== */
+    .container{
+      max-width:1400px;
+      margin:auto;
+      padding:3.5rem 1.5rem;
+    }
+    .section-title{
+      font-size:1.6rem;
+      font-weight:700;
+      color:var(--gov-blue);
+      margin-bottom:1.8rem;
+      border-left:6px solid var(--gov-blue);
+      padding-left:.8rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:2rem;
+    }
+
+    /* ==============================
+       CARDS (OFFICIAL PANELS)
+       ============================== */
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      padding:2rem;
+      border:1px solid var(--border);
+      box-shadow:0 20px 40px rgba(2,6,23,.08);
+      transition:.25s ease;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 30px 65px rgba(2,6,23,.12);
+    }
+    .card h3{
+      margin-top:0;
+      color:var(--gov-blue-2);
+      font-size:1.15rem;
+    }
+    .card p,.card li{
+      font-size:.92rem;
+      color:var(--muted);
+    }
+
+    /* ==============================
+       BUTTONS
+       ============================== */
+    .btn{
+      display:inline-block;
+      margin-top:1rem;
+      padding:.65rem 1.2rem;
+      border-radius:999px;
+      background:var(--gov-blue);
+      color:#fff;
+      text-decoration:none;
+      font-size:.85rem;
+      font-weight:600;
+    }
+    .btn.secondary{background:#ffffff;color:var(--gov-blue);border:1px solid var(--gov-blue)}
+    .btn:hover{background:var(--gov-blue-2)}
+
+    /* ==============================
+       STATS / KPI
+       ============================== */
+    .stats{
+      margin-top:3rem;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:1.5rem;
+    }
+    .stat{
+      background:linear-gradient(135deg,#eff6ff,#ffffff);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:2rem 1.5rem;
+      text-align:center;
+    }
+    .stat h2{margin:0;color:var(--gov-blue);font-size:2.2rem}
+    .stat span{font-size:.85rem;color:var(--muted)}
+
+    /* ==============================
+       FOOTER (OFFICIAL GOV)
+       ============================== */
+    footer{
+      background:#020617;
+      color:#cbd5f5;
+      padding:3rem 1.5rem 2rem;
+      margin-top:3rem;
+      font-size:.8rem;
+    }
+    footer .footer-inner{max-width:1200px;margin:auto;text-align:center}
+    footer strong{color:#fff}
+  </style>
+</head>
+<body>
+
+<div class="topbar">Official Website of the Department of Education – Eastern Visayas Region (Region VIII)</div>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="seal">DEPED</div>
+      <div>
+        DepEd Region VIII<br>
+        <small style="font-weight:500;color:var(--muted)">Quality Assurance Division</small>
+      </div>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#functions">Functions</a>
+      <a href="#monitoring">Monitoring</a>
+      <a href="#resources">Resources</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Quality Assurance Division</h1>
+    <p>
+      Upholding standards, accountability, and continuous improvement in basic education
+      through systematic monitoring and evaluation across DepEd Region VIII.
+    </p>
+  </div>
+</section>
+
+<div class="container">
+
+  <section id="about">
+    <div class="section-title">About the Division</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Mandate</h3>
+        <p>
+          The Quality Assurance Division (QAD) is responsible for ensuring that schools and
+          learning centers comply with national education standards, policies, and guidelines.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Scope of Work</h3>
+        <p>
+          QAD conducts regional monitoring, validation, and evaluation of public and private
+          schools to promote quality, transparency, and accountability.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="functions" style="margin-top:3.5rem">
+    <div class="section-title">Core Functions</div>
+    <div class="grid">
+      <div class="card"><h3>Monitoring & Evaluation</h3><p>Compliance monitoring of schools and programs.</p></div>
+      <div class="card"><h3>Policy Validation</h3><p>Evaluation of permits, recognition, and government authority.</p></div>
+      <div class="card"><h3>Technical Assistance</h3><p>Support to Schools Division Offices and institutions.</p></div>
+    </div>
+  </section>
+
+  <section id="monitoring" style="margin-top:3.5rem">
+    <div class="section-title">Regional Monitoring</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Ocular Inspection Checklist</h3>
+        <p>Official tool for facilities, management, and learning resource evaluation.</p>
+        <a class="btn" href="ocular-checklist.html" target="_blank">Open Checklist</a>
+      </div>
+      <div class="card">
+        <h3>Quality Assurance Reports</h3>
+        <p>Findings, observations, and regional recommendations.</p>
+        <a class="btn" href="#">View Reports</a>
+      </div>
+      <div class="card">
+        <h3>Monitoring Schedules</h3>
+        <p>Approved schedules of validation and evaluation visits.</p>
+        <a class="btn" href="#">View Schedule</a>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><h2>13</h2><span>Schools Monitored</span></div>
+      <div class="stat"><h2>6</h2><span>Divisions Covered</span></div>
+      <div class="stat"><h2>100%</h2><span>Policy Alignment</span></div>
+    </div>
+  </section>
+
+  <section id="resources" style="margin-top:3.5rem">
+    <div class="section-title">Policies & Resources</div>
+    <div class="grid">
+      <div class="card"><h3>DepEd Orders</h3><p>National and regional issuances</p></div>
+      <div class="card"><h3>QA Framework</h3><p>Standards, indicators, and tools</p></div>
+      <div class="card"><h3>Templates</h3><p>Official monitoring forms</p></div>
+    </div>
+  </section>
+
+  <section id="contact" style="margin-top:3.5rem">
+    <div class="section-title">Contact Information</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Quality Assurance Division</h3>
+        <p>DepEd Regional Office VIII</p>
+        <p>Email: qad.region8@deped.gov.ph</p>
+        <p>Phone: (053) XXX-XXXX</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <strong>Department of Education – Region VIII</strong><br>
+    Quality Assurance Division · Government of the Republic of the Philippines
+  </div>
+</footer>
+
+</body>
+</html>

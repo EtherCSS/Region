@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ocular Inspection Checklist</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background:#f8fafc;
+  margin:0;
+  padding:2rem;
+  color:#0f172a;
+}
+
+h1, h2 {
+  color:#0b3c8a;
+}
+
+h1 {
+  text-align:center;
+  font-weight:800;
+  margin-bottom:2rem;
+}
+
+h2 {
+  border-left:6px solid #0b3c8a;
+  padding-left:.8rem;
+  margin-top:2rem;
+}
+
+.section {
+  background:#fff;
+  padding:1.5rem 2rem;
+  border-radius:15px;
+  box-shadow:0 15px 30px rgba(2,6,23,.08);
+  margin-bottom:2rem;
+}
+
+label {
+  display:block;
+  margin-bottom:.6rem;
+  font-weight:500;
+}
+
+input, textarea {
+  width:100%;
+  padding:.6rem;
+  margin-top:.2rem;
+  margin-bottom:.8rem;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+}
+
+textarea {
+  min-height:80px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:1rem;
+}
+
+th, td {
+  border:1px solid #e5e7eb;
+  padding:.6rem;
+}
+
+th {
+  background:#f1f5f9;
+}
+
+.btn {
+  display:inline-block;
+  padding:.7rem 1.6rem;
+  border-radius:999px;
+  background:#0b3c8a;
+  color:#fff;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+}
+
+.center {
+  text-align:center;
+}
+
+/* ===== HEADER & FOOTER IMAGES ===== */
+.deped-header,
+.deped-footer {
+  text-align:center;
+}
+
+.deped-header img,
+.deped-footer img {
+  max-width:100%;
+  height:auto;
+}
+
+/* ===== REPORT ===== */
+#reportContainer {
+  display:none;
+  background:#fff;
+  padding:2rem;
+}
+
+/* ===== PRINT SETTINGS ===== */
+@media print {
+  body * {
+    visibility:hidden;
+  }
+
+  #reportContainer,
+  #reportContainer * {
+    visibility:visible;
+  }
+
+  #reportContainer {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+  }
+
+  .deped-footer {
+    margin-top:2cm;
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>OCULAR INSPECTION CHECKLIST</h1>
+
+<div class="section">
+  <label>Division: <input id="division"></label>
+  <label>Name of School / Proposed School: <input id="schoolName"></label>
+  <label>School ID: <input id="schoolID"></label>
+  <label>Complete Address: <input id="address"></label>
+  <label>Contact Number: <input id="contact"></label>
+  <label>Email Address: <input id="email"></label>
+  <label>Basic Education Program / Level Applied: <input id="program"></label>
+  <label>School Year Applied For: <input id="schoolYear"></label>
+  <label>Date of Visit: <input type="date" id="visitDate"></label>
+</div>
+
+<div class="section">
+  <h2>A. School Facilities</h2>
+  <table>
+    <tr><th>Requirement</th><th>Remarks</th></tr>
+    <tr><td>Sufficient classrooms</td><td><input id="f1"></td></tr>
+    <tr><td>Toilet facilities</td><td><input id="f2"></td></tr>
+    <tr><td>Laboratories with equipment</td><td><input id="f3"></td></tr>
+    <tr><td>Functional library</td><td><input id="f4"></td></tr>
+    <tr><td>Medical & Dental clinic</td><td><input id="f5"></td></tr>
+    <tr><td>School canteen</td><td><input id="f6"></td></tr>
+    <tr><td>Playground</td><td><input id="f7"></td></tr>
+    <tr><td>School stage</td><td><input id="f8"></td></tr>
+    <tr><td>Flagpole</td><td><input id="f9"></td></tr>
+  </table>
+</div>
+
+<div class="center">
+  <button class="btn" onclick="generateReport()">📄 View & Print Evaluation Report</button>
+</div>
+
+<!-- ===== REPORT ===== -->
+<div id="reportContainer">
+
+  <!-- HEADER IMAGE -->
+  <div class="deped-header">
+    <img src="deped-button.png" alt="DepEd Header">
+  </div>
+
+  <h2 class="center">EVALUATION AND RECOMMENDATION REPORT OF SCHOOL’S APPLICATION</h2>
+
+  <p class="center" id="rSchool"></p>
+  <p class="center" id="rAddress"></p>
+
+  <h2>BACKGROUND</h2>
+  <p>Based on the feasibility studies or current situation of the school/community with legal basis.</p>
+
+  <h2>FINDINGS</h2>
+  <ol id="rFindings"></ol>
+
+  <h2>RECOMMENDATIONS</h2>
+  <p>In view of the foregoing evaluation and findings, the team respectfully recommends that:</p>
+  <ol id="rRecommendations"></ol>
+
+  <br><br>
+
+  <p>
+    Evaluated by:<br><br>
+    _______________________________<br>
+    <strong>Education Program Supervisor</strong><br>
+    Date: _____________________
+  </p>
+
+  <br>
+
+  <p>
+    Reviewed by:<br><br>
+    _______________________________<br>
+    <strong>Chief Education Supervisor</strong><br>
+    Date: _____________________
+  </p>
+
+  <!-- FOOTER IMAGE -->
+  <div class="deped-footer">
+    <img src="deped-header.png" alt="DepEd Footer">
+  </div>
+
+</div>
+
+<script>
+function generateReport() {
+  rSchool.textContent = schoolName.value.toUpperCase() || "(NAME OF THE SCHOOL)";
+  rAddress.textContent = address.value.toUpperCase() || "(ADDRESS OF THE SCHOOL)";
+
+  const findings = [
+    "Classrooms: " + f1.value,
+    "Toilet facilities: " + f2.value,
+    "Laboratories: " + f3.value,
+    "Library: " + f4.value,
+    "Medical and Dental Clinic: " + f5.value,
+    "School Canteen: " + f6.value,
+    "Playground: " + f7.value,
+    "School Stage: " + f8.value,
+    "Flagpole: " + f9.value
+  ].filter(f => !f.endsWith(": "));
+
+  rFindings.innerHTML = "";
+  findings.forEach(f => {
+    const li = document.createElement("li");
+    li.textContent = f;
+    rFindings.appendChild(li);
+  });
+
+  rRecommendations.innerHTML = "";
+  ["Approval subject to DepEd standards.",
+   "Continuous monitoring and validation of requirements."
+  ].forEach(r => {
+    const li = document.createElement("li");
+    li.textContent = r;
+    rRecommendations.appendChild(li);
+  });
+
+  reportContainer.style.display = "block";
+  window.scrollTo(0, reportContainer.offsetTop);
+}
+</script>
+
+</body>
+</html>
