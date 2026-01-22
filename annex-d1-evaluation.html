@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Annex D-1 — Evaluation Sheet (DepEd Region VIII)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Visual goal: match the screenshot layout and styling as closely as possible */
+    :root{
+      --gov-blue:#0b3c8a;
+      --muted:#6b7280;
+      --border:#dbeaf8;
+      --card:#ffffff;
+      --bg:#f6f9fc;
+      --table-head:#f1f6fb;
+      --radius:8px;
+      --text:#0f172a;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:18px;
+    }
+
+    /* Header like screenshot */
+    .header {
+      background:linear-gradient(180deg,var(--gov-blue),#1e5bbf);
+      color:#fff;
+      padding:18px 22px;
+      border-radius:10px;
+      box-shadow:0 8px 20px rgba(11,60,138,.12);
+      margin-bottom:18px;
+    }
+    .header h1{margin:0;font-size:18px;font-weight:700;letter-spacing:.2px}
+    .header p{margin:6px 0 0;font-size:13px;opacity:.95}
+
+    /* Container card */
+    .sheet {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:14px;
+      box-shadow:0 8px 20px rgba(12,38,84,.04);
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    /* top meta row */
+    .meta {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+    .meta .meta-item{flex:1 1 220px}
+    label.small{display:block;font-weight:600;margin-bottom:6px;font-size:13px;color:var(--muted)}
+    input[type="text"], input[type="date"], input[type="number"], select, textarea{
+      width:100%;
+      padding:8px 10px;
+      border:1px solid #e6f0fb;
+      border-radius:6px;
+      background:#fff;
+      font-size:14px;
+      color:var(--text);
+    }
+    textarea{min-height:72px;resize:vertical}
+
+    /* main evaluation table */
+    .eval-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+      font-size:14px;
+    }
+    .eval-table thead th{
+      background:var(--table-head);
+      border:1px solid var(--border);
+      padding:10px;
+      text-align:left;
+      vertical-align:middle;
+      font-weight:700;
+      font-size:13px;
+    }
+    .eval-table td{
+      border:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+      background:#fff;
+    }
+
+    /* column widths to match screenshot proportions */
+    .col-criteria{width:22%}
+    .col-reqdocs{width:34%}
+    .col-pereval{width:30%}
+    .col-remarks{width:14%}
+
+    /* small internal tables */
+    .mini-table{width:100%;border-collapse:collapse;margin-top:6px}
+    .mini-table th,.mini-table td{border:1px solid #eef6ff;padding:6px;font-size:13px}
+    .center{text-align:center}
+
+    /* signature tables */
+    .sign-table{width:100%;border-collapse:collapse;margin-top:12px}
+    .sign-table th,.sign-table td{border:1px solid var(--border);padding:10px;font-size:14px;vertical-align:top}
+    .sign-table th{background:#f8fbff;font-weight:700}
+
+    /* buttons area */
+    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    .btn{
+      background:var(--gov-blue);
+      color:#fff;
+      border:none;
+      padding:9px 14px;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .btn.ghost{background:#fff;color:var(--gov-blue);border:1px solid var(--gov-blue)}
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+
+    /* responsive: stack cells vertically on narrow screens but keep labels */
+    @media (max-width:980px){
+      .eval-table thead{display:none}
+      .eval-table, .eval-table tbody, .eval-table tr, .eval-table td{display:block;width:100%}
+      .eval-table tr{margin-bottom:12px;border-bottom:1px dashed var(--border)}
+      .eval-table td{border:none;padding:8px 0}
+      .eval-table td[data-label]::before{
+        content:attr(data-label);
+        display:block;
+        font-weight:700;
+        color:var(--muted);
+        margin-bottom:6px;
+      }
+      .sign-table, .sign-table thead, .sign-table tbody, .sign-table tr, .sign-table td {display:block;width:100%}
+      .sign-table td {border:none;padding:8px 0}
+      .sign-table td[data-label]::before{content:attr(data-label);display:block;font-weight:700;color:var(--muted);margin-bottom:6px}
+    }
+  </style>
+</head>
+<body>
+  <header class="header" role="banner">
+    <h1>APPLICATION FOR ESTABLISHMENT OF PUBLIC ELEMENTARY/SECONDARY SCHOOL</h1>
+    <p>Evaluation Sheet — Annex D-1 · Department of Education · Region VIII</p>
+  </header>
+
+  <main class="sheet" role="main" aria-labelledby="sheet-title">
+    <div class="meta" aria-hidden="false">
+      <div class="meta-item">
+        <label class="small">Division of</label>
+        <input id="division" type="text" placeholder="e.g., Calbayog City Schools Division">
+      </div>
+      <div class="meta-item">
+        <label class="small">Region</label>
+        <input id="region" type="text" value="Region VIII">
+      </div>
+      <div class="meta-item">
+        <label class="small">Date</label>
+        <input id="eval_date" type="date">
+      </div>
+    </div>
+
+    <table class="eval-table" role="table" aria-label="Evaluation sheet">
+      <thead>
+        <tr>
+          <th class="col-criteria">CRITERIA</th>
+          <th class="col-reqdocs">REQUIRED DOCUMENTS</th>
+          <th class="col-pereval">PER EVALUATION</th>
+          <th class="col-remarks">REMARKS<br><small style="font-weight:600">(PASSED OR FAILED — Please state reason)</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Row 1 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>1. Urgent need / Feasibility</strong><br>
+            School to be established is an urgent need in the area; feasibility study required.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            <ol style="margin:0 0 0 16px;padding:0">
+              <li>Letter request to SDS (PTA / Barangay)</li>
+              <li>Feasibility study: justification, org. structure, environment, dev plan, budget</li>
+            </ol>
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">Requesting Officer</label>
+            <input id="req_officer_1" type="text" placeholder="Name">
+            <label class="small" style="margin-top:8px">Feasibility Study Prepared By</label>
+            <input id="fs_by_1" type="text" placeholder="Name">
+            <div style="margin-top:8px">
+              <label class="small">Recommended/endorsed by SDS?</label>
+              <div style="display:flex;gap:10px;margin-top:6px">
+                <label><input type="radio" name="sds_endorse_1" value="YES"> YES</label>
+                <label><input type="radio" name="sds_endorse_1" value="NO"> NO</label>
+              </div>
+            </div>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_1" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 2 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>2. LGU support</strong><br>
+            Sangguniang Bayan/Panglungsod Resolution supporting establishment.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            <ul style="margin:0;padding-left:16px">
+              <li>SB/Panglungsod Resolution (approved by Mayor/Governor)</li>
+              <li>Resolution indicates LGU financial support</li>
+            </ul>
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">Resolution No.</label>
+            <input id="res_no" type="text">
+            <label class="small" style="margin-top:8px">Approved by</label>
+            <input id="res_approved_by" type="text">
+            <div style="margin-top:8px">
+              <label class="small">Willingness to provide financial support?</label>
+              <div style="display:flex;gap:10px;margin-top:6px">
+                <label><input type="radio" name="lgu_support" value="YES"> YES</label>
+                <label><input type="radio" name="lgu_support" value="NO"> NO</label>
+              </div>
+            </div>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_2" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 3 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>3. Prospective enrollees</strong><br>
+            At least 100 pupils/students composed of one or more grade levels.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            <ul style="margin:0;padding-left:16px">
+              <li>List of prospective enrollees per grade (names, ages, addresses)</li>
+              <li>Justification by SDS if &lt; 100</li>
+            </ul>
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <table class="mini-table" aria-label="enrollee counts">
+              <thead><tr><th>Grade</th><th class="center">No.</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td class="center"><input id="g1" type="number" min="0" style="width:84px"></td></tr>
+                <tr><td>2</td><td class="center"><input id="g2" type="number" min="0" style="width:84px"></td></tr>
+                <tr><td>3</td><td class="center"><input id="g3" type="number" min="0" style="width:84px"></td></tr>
+                <tr><td>4</td><td class="center"><input id="g4" type="number" min="0" style="width:84px"></td></tr>
+                <tr><td>5</td><td class="center"><input id="g5" type="number" min="0" style="width:84px"></td></tr>
+                <tr><td>6</td><td class="center"><input id="g6" type="number" min="0" style="width:84px"></td></tr>
+                <tr><th>TOTAL</th><th class="center"><input id="total_enrollees" type="number" min="0" style="width:84px"></th></tr>
+              </tbody>
+            </table>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_3" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 4 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>4. GASTPE status</strong><br>
+            No private high school participating in GASTPE or allocation reached.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            Certification from SDS re: GASTPE participation / allocation.
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">Certification signed by</label>
+            <input id="gastpe_by" type="text">
+            <label class="small" style="margin-top:8px">Date</label>
+            <input id="gastpe_date" type="date">
+            <label class="small" style="margin-top:8px">Participating schools (if any)</label>
+            <input id="gastpe_list" type="text" placeholder="Name(s) and slots">
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_4" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 5 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>5. Distance from existing public schools</strong><br>
+            Not within 2 km (rural) / 1 km (urban) unless waived.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            <ol style="margin:0 0 0 16px;padding:0">
+              <li>Map drawn to scale certified by Municipal/City Engineer</li>
+              <li>Certification from Municipal/City Engineer</li>
+            </ol>
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <table class="mini-table" aria-label="nearest schools">
+              <thead><tr><th>Name</th><th>Distance (km)</th></tr></thead>
+              <tbody>
+                <tr><td><input id="near1" type="text"></td><td class="center"><input id="dist1" type="number" step="0.01" min="0" style="width:90px"></td></tr>
+                <tr><td><input id="near2" type="text"></td><td class="center"><input id="dist2" type="number" step="0.01" min="0" style="width:90px"></td></tr>
+                <tr><td><input id="near3" type="text"></td><td class="center"><input id="dist3" type="number" step="0.01" min="0" style="width:90px"></td></tr>
+              </tbody>
+            </table>
+            <label class="small">Certification signed by</label>
+            <input id="map_cert_by" type="text">
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_5" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 6 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>6. School site availability</strong><br>
+            At least 5,000 sqm (rural) / 2,500 sqm (urban) or justification.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            Deed of Donation / Deed of Sale / Usufruct / OCT / TCT in favor of DepEd; justification if size not met.
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">Document submitted</label>
+            <input id="site_doc" type="text">
+            <label class="small" style="margin-top:8px">Size (sqm)</label>
+            <input id="site_size" type="number" min="0">
+            <div style="margin-top:8px">
+              <label class="small">In favor / in the name of DepEd?</label>
+              <div style="display:flex;gap:10px;margin-top:6px">
+                <label><input type="radio" name="site_favor" value="YES"> YES</label>
+                <label><input type="radio" name="site_favor" value="NO"> NO</label>
+              </div>
+            </div>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_6" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 7 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>7. Site risk clearance</strong><br>
+            Clearance from MGB and DENR-RO confirming site is not high-risk.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            MGB clearance (updated); DENR-RO certification (updated).
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">MGB signed by</label>
+            <input id="mgb_by" type="text">
+            <label class="small" style="margin-top:8px">DENR signed by</label>
+            <input id="denr_by" type="text">
+            <div style="margin-top:8px">
+              <label class="small">Declared safe / not high-risk?</label>
+              <div style="display:flex;gap:10px;margin-top:6px">
+                <label><input type="radio" name="risk_safe" value="YES"> YES</label>
+                <label><input type="radio" name="risk_safe" value="NO"> NO</label>
+              </div>
+            </div>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_7" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 8 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>8. Initial classrooms and compliance</strong><br>
+            At least two (2) classrooms; classrooms must comply with DepEd standards (7m × 9m).
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            School site development plan; school building plan & technical specifications; building permit; BFP certificate; inspection report.
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">No. of classrooms to be built</label>
+            <input id="no_classrooms" type="number" min="0" style="width:120px">
+            <table class="mini-table" style="margin-top:8px">
+              <thead><tr><th>Particulars</th><th class="center">YES</th><th class="center">NO</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Technical specs attached?</td>
+                  <td class="center"><input type="radio" name="specs_attached" value="YES"></td>
+                  <td class="center"><input type="radio" name="specs_attached" value="NO"></td>
+                </tr>
+                <tr>
+                  <td>Item number per latest PSIPOP present?</td>
+                  <td class="center"><input type="radio" name="psipop_item" value="YES"></td>
+                  <td class="center"><input type="radio" name="psipop_item" value="NO"></td>
+                </tr>
+                <tr>
+                  <td>Compliant with DepEd standards (7m × 9m)?</td>
+                  <td class="center"><input type="radio" name="compliant_deped" value="YES"></td>
+                  <td class="center"><input type="radio" name="compliant_deped" value="NO"></td>
+                </tr>
+              </tbody>
+            </table>
+            <label class="small" style="margin-top:8px">If not compliant, state deviations</label>
+            <textarea id="classroom_deviations" placeholder="Dimensions / deviations"></textarea>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_8" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 9 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>9. Transportation & development plan</strong><br>
+            Modes of transport and proposed school development plan.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            Transportation modes and travel times; proposed school development plan and budget breakdown.
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <table class="mini-table">
+              <thead><tr><th>Mode</th><th>Frequency</th><th>Travel time</th></tr></thead>
+              <tbody>
+                <tr><td>Tricycle</td><td><input id="tricycle_freq" type="text"></td><td><input id="tricycle_time" type="text"></td></tr>
+                <tr><td>Jeepney</td><td><input id="jeepney_freq" type="text"></td><td><input id="jeepney_time" type="text"></td></tr>
+                <tr><td>Hiking</td><td><input id="hiking_freq" type="text"></td><td><input id="hiking_time" type="text"></td></tr>
+              </tbody>
+            </table>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_9" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 10 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>10. Adequate funds & MOA</strong><br>
+            Notarized MOA between DepEd and LGU; LGU support for construction, O&M, salaries.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            Notarized MOA; SB/Panglungsod Resolution; certification of availability of funds.
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">MOA — DepEd signed by</label>
+            <input id="moa_deped_by" type="text">
+            <label class="small" style="margin-top:8px">MOA — LGU signed by</label>
+            <input id="moa_lgu_by" type="text">
+            <label class="small" style="margin-top:8px">Total LGU support (PhP)</label>
+            <input id="lgusupport_total" type="number" min="0">
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_10" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+        <!-- Row 11 -->
+        <tr>
+          <td class="col-criteria" data-label="CRITERIA">
+            <strong>11. Borrowed personnel</strong><br>
+            List of teaching and non-teaching personnel to be borrowed from nearby schools.
+          </td>
+          <td class="col-reqdocs" data-label="REQUIRED DOCUMENTS">
+            List with position titles, item numbers per PSIPOP, and name of lending school.
+          </td>
+          <td class="col-pereval" data-label="PER EVALUATION">
+            <label class="small">No. of teachers to be borrowed</label>
+            <input id="borrow_teachers" type="number" min="0" style="width:120px">
+            <label class="small" style="margin-top:8px">No. of non-teaching personnel</label>
+            <input id="borrow_non_teaching" type="number" min="0" style="width:120px">
+            <table class="mini-table" style="margin-top:8px">
+              <thead><tr><th>Particulars</th><th class="center">YES</th><th class="center">NO</th></tr></thead>
+              <tbody>
+                <tr><td>Position Titles</td><td class="center"><input type="radio" name="bp_titles" value="YES"></td><td class="center"><input type="radio" name="bp_titles" value="NO"></td></tr>
+                <tr><td>Item Number per PSIPOP</td><td class="center"><input type="radio" name="bp_item" value="YES"></td><td class="center"><input type="radio" name="bp_item" value="NO"></td></tr>
+                <tr><td>Name of Lending School</td><td class="center"><input type="radio" name="bp_school" value="YES"></td><td class="center"><input type="radio" name="bp_school" value="NO"></td></tr>
+              </tbody>
+            </table>
+          </td>
+          <td class="col-remarks" data-label="REMARKS">
+            <textarea id="remarks_11" placeholder="Passed / Failed — reason"></textarea>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Signatures -->
+    <section aria-label="Signatures and approvals" style="margin-top:18px">
+      <h3 style="margin:0 0 8px 0;color:var(--gov-blue);font-size:15px">Signatures and Approvals</h3>
+
+      <!-- DREC signatories -->
+      <table class="sign-table" aria-label="DREC signatories">
+        <thead>
+          <tr>
+            <th style="width:60%">Evaluated by Division Review and Evaluation Committee (DREC)</th>
+            <th style="width:40%">Position / Designation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Recommended by (SDS) -->
+      <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1 1 420px">
+          <label class="small">Recommended by</label>
+          <input type="text" placeholder="Schools Division Superintendent — Signature over printed name" style="width:100%">
+        </div>
+        <div style="flex:0 0 220px">
+          <label class="small">Date</label>
+          <input type="date">
+        </div>
+      </div>
+
+      <!-- RIT signatories -->
+      <table class="sign-table" aria-label="RIT signatories" style="margin-top:12px">
+        <thead>
+          <tr>
+            <th style="width:60%">Validated by Regional Inspectorate Team (RIT)</th>
+            <th style="width:40%">Position / Designation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+          <tr><td><input type="text" placeholder="Signature over printed name" style="width:100%"></td><td><input type="text" placeholder="Position / Designation" style="width:100%"></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Approved (Regional Director) -->
+      <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1 1 420px">
+          <label class="small">Approved</label>
+          <input type="text" placeholder="Regional Director — Signature over printed name" style="width:100%">
+        </div>
+        <div style="flex:0 0 220px">
+          <label class="small">Date</label>
+          <input type="date">
+        </div>
+      </div>
+    </section>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px">
+      <div class="note">Complete the sheet and click Submit. A summary will open in a new tab for Regional QAD and a local copy will be saved.</div>
+      <div class="actions">
+        <button id="clearBtn" class="btn ghost" type="button">Clear</button>
+        <button id="submitBtn" class="btn" type="button">Submit Evaluation</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+/* =========================
+   COLLECT FORM DATA
+======================== */
+function collect() {
+  const data = {};
+  const ids = [
+    'division','region','eval_date',
+    'req_officer_1','fs_by_1',
+    'res_no','res_approved_by',
+    'g1','g2','g3','g4','g5','g6','total_enrollees',
+    'gastpe_by','gastpe_date','gastpe_list',
+    'near1','dist1','near2','dist2','near3','dist3','map_cert_by',
+    'site_doc','site_size',
+    'mgb_by','denr_by',
+    'no_classrooms','classroom_deviations',
+    'tricycle_freq','tricycle_time',
+    'jeepney_freq','jeepney_time',
+    'hiking_freq','hiking_time',
+    'moa_deped_by','moa_lgu_by','lgusupport_total',
+    'borrow_teachers','borrow_non_teaching'
+  ];
+
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    data[id] = el ? el.value : '';
+  });
+
+  const radios = [
+    'sds_endorse_1','lgu_support','site_favor','risk_safe',
+    'specs_attached','psipop_item','compliant_deped',
+    'bp_titles','bp_item','bp_school'
+  ];
+
+  radios.forEach(name => {
+    const sel = document.querySelector(`input[name="${name}"]:checked`);
+    data[name] = sel ? sel.value : '';
+  });
+
+  for (let i = 1; i <= 11; i++) {
+    data[`remarks_${i}`] =
+      document.getElementById(`remarks_${i}`)?.value || '';
+  }
+
+  data._submitted_at = new Date().toISOString();
+  return data;
+}
+
+/* =========================
+   SAVE TO LOCAL STORAGE
+======================== */
+function saveLocal(payload) {
+  try {
+    const KEY = 'region8_annexd1_submissions';
+    const arr = JSON.parse(localStorage.getItem(KEY) || '[]');
+    arr.unshift(payload);
+    localStorage.setItem(KEY, JSON.stringify(arr.slice(0, 200)));
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+}
+
+/* =========================
+   DOWNLOAD JSON BACKUP
+======================== */
+function downloadJSON(payload) {
+  const blob = new Blob(
+    [JSON.stringify(payload, null, 2)],
+    { type: 'application/json' }
+  );
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'annex-d1-submission.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* =========================
+   OPEN SUMMARY WINDOW (PDF ready)
+======================== */
+function openSummary(payload) {
+  const win = window.open('', '_blank');
+  if (!win) return false;
+
+  const esc = s => String(s ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>');
+
+  let rows = '';
+  Object.keys(payload).forEach(k => {
+    if (k.startsWith('_')) return;
+    rows += `
+      <tr>
+        <th style="text-align:left;padding:6px;background:#f3f8ff;border:1px solid #ccc;">
+          ${esc(k)}
+        </th>
+        <td style="padding:6px;border:1px solid #ccc;">
+          ${esc(payload[k]) || '&nbsp;'}
+        </td>
+      </tr>`;
+  });
+
+  win.document.write(`
+    <!doctype html>
+    <html>
+    <head>
+      <title>Annex D-1 Evaluation Summary</title>
+      <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h2 { color: #0b3c8a; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { font-size: 13px; }
+      </style>
+    </head>
+    <body>
+      <h2>Annex D-1 — Evaluation Summary</h2>
+      <table>${rows}</table>
+      <p style="margin-top:20px;font-size:12px;">
+        Generated on: ${new Date().toLocaleString()}
+      </p>
+  `);
+
+  win.document.close();
+  return true;
+}
+
+/* =========================
+   SUBMIT BUTTON
+======================== */
+document.getElementById('submitBtn').addEventListener('click', () => {
+  const division = document.getElementById('division').value.trim();
+  const region = document.getElementById('region').value.trim();
+
+  if (!division || !region) {
+    alert('Please complete Division and Region fields.');
+    return;
+  }
+
+  const payload = collect();
+  const saved = saveLocal(payload);
+
+  const opened = openSummary(payload);
+  if (!opened) {
+    alert('Popup blocked. Allow popups to view summary.');
+  }
+
+  if (!saved) {
+    downloadJSON(payload);
+    alert('Local save failed. JSON downloaded.');
+  } else {
+    alert('Evaluation saved locally.');
+    localStorage.setItem('annexD1_completed', 'true');
+  }
+});
+
+/* =========================
+   CLEAR BUTTON
+======================== */
+document.getElementById('clearBtn').addEventListener('click', () => {
+  if (!confirm('Clear all fields?')) return;
+
+  document.querySelectorAll('.sheet input, .sheet textarea').forEach(el => {
+    if (el.type === 'radio' || el.type === 'checkbox') {
+      el.checked = false;
+    } else {
+      el.value = '';
+    }
+  });
+
+  document.getElementById('region').value = 'Region VIII';
+});
+</script>
+
+</body>
+</html>
